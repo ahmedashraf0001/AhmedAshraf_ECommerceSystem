@@ -1,0 +1,14 @@
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.exe
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.deps.json
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.runtimeconfig.json
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.dll
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.pdb
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.GeneratedMSBuildEditorConfig.editorconfig
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.AssemblyInfoInputs.cache
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.AssemblyInfo.cs
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.csproj.CoreCompileInputs.cache
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.dll
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\refint\e-commerce system.dll
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.pdb
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.genruntimeconfig.cache
+G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\ref\e-commerce system.dll
