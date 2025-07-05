@@ -4,9 +4,8 @@ using e_commerce_system.Models;
 
 namespace e_commerce_system.Services
 {
-    class CheckoutService
-    {
-        
+    class CheckoutService: ICheckoutService
+    {   
         public void Checkout(Customer customer, Cart cart) 
         {
             if (cart.IsEmpty()) throw new ArgumentException(Constants.CartPassedEmptly);
@@ -28,12 +27,11 @@ namespace e_commerce_system.Services
                     decimal itemtotal = item.Value * item.Key.Price;
                     subtotal += itemtotal;
 
-                    if (item.Key is IShippable shippable)
+                    if (item.Key.NeedsShipping())
                     {
+                        var shipInfo = item.Key.GetShippingInfo();
                         for (int i = 0; i < item.Value; i++)
-                        {
-                            shippables.Add(shippable);
-                        }
+                            shippables.Add(shipInfo!);
                     }
                 }
                 shippingfees = shippables.Sum(e => e.GetWeight()) * Constants.FeesForKG;

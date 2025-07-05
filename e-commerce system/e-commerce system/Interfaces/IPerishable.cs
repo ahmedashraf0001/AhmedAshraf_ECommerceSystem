@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace e_commerce_system.Interfaces
 {
-    public interface IShippable
+    public interface IPerishable
     {
-        string GetName();
-        double GetWeight();
+        bool IsExpired();
     }
 }

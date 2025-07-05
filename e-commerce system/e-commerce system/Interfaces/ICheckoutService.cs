@@ -1,4 +1,5 @@
-﻿using System;
+﻿using e_commerce_system.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace e_commerce_system.Interfaces
 {
-    public interface IShippable
+    interface ICheckoutService
     {
-        string GetName();
-        double GetWeight();
+        void Checkout(Customer customer, Cart cart);
     }
 }

@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|g:\\work\\coding\\backend\\,net api\\projects\\e-commerce system\\e-commerce system\\services\\shippingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|solutionrelative:e-commerce system\\services\\shippingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|g:\\work\\coding\\backend\\,net api\\projects\\e-commerce system\\e-commerce system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|solutionrelative:e-commerce system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|g:\\work\\coding\\backend\\,net api\\projects\\e-commerce system\\e-commerce system\\services\\checkoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|solutionrelative:e-commerce system\\services\\checkoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|g:\\work\\coding\\backend\\,net api\\projects\\e-commerce system\\e-commerce system\\models\\nonperishableproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|solutionrelative:e-commerce system\\models\\nonperishableproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|g:\\work\\coding\\backend\\,net api\\projects\\e-commerce system\\e-commerce system\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44C25253-B1E2-43F6-A9F0-0A7389DB3B55}|e-commerce system\\e-commerce system.csproj|solutionrelative:e-commerce system\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -13,20 +29,78 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 2445,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 2009,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Models\\Cart.cs",
+              "RelativeDocumentMoniker": "e-commerce system\\Models\\Cart.cs",
+              "ToolTip": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Models\\Cart.cs",
+              "RelativeToolTip": "e-commerce system\\Models\\Cart.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T18:14:57.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Program.cs",
               "RelativeDocumentMoniker": "e-commerce system\\Program.cs",
               "ToolTip": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Program.cs",
               "RelativeToolTip": "e-commerce system\\Program.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAmwIUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-04T15:39:28.462Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 2038,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CheckoutService.cs",
+              "DocumentMoniker": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Services\\CheckoutService.cs",
+              "RelativeDocumentMoniker": "e-commerce system\\Services\\CheckoutService.cs",
+              "ToolTip": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Services\\CheckoutService.cs",
+              "RelativeToolTip": "e-commerce system\\Services\\CheckoutService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCEAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T18:27:29.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ShippingService.cs",
+              "DocumentMoniker": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Services\\ShippingService.cs",
+              "RelativeDocumentMoniker": "e-commerce system\\Services\\ShippingService.cs",
+              "ToolTip": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Services\\ShippingService.cs",
+              "RelativeToolTip": "e-commerce system\\Services\\ShippingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T18:26:08.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NonPerishableProduct.cs",
+              "DocumentMoniker": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Models\\NonPerishableProduct.cs",
+              "RelativeDocumentMoniker": "e-commerce system\\Models\\NonPerishableProduct.cs",
+              "ToolTip": "G:\\work\\Coding\\backend\\,net api\\Projects\\e-commerce system\\e-commerce system\\Models\\NonPerishableProduct.cs",
+              "RelativeToolTip": "e-commerce system\\Models\\NonPerishableProduct.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T17:59:46.875Z",
               "EditorCaption": ""
             }
           ]

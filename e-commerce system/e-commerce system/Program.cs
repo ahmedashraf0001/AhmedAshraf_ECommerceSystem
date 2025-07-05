@@ -14,73 +14,98 @@ namespace e_commerce_system
             {
                 var customer = new Customer(1000m);
                 var cart = new Cart();
-                var cheese = new PerishableShippableProduct("Cheese", 100m, 5, 0.2, DateTime.Today.AddDays(3));
-                var tv = new NonPerishableShippableProduct("TV", 300m, 2, 5.0);
-                var scratchCard = new NonPerishableNonShippableProduct("ScratchCard", 50m, 10);
-                var biscuits = new PerishableNonShippableProduct("Biscuits", 150m, 3, DateTime.Today.AddDays(2));
+
+                var cheese = new Product("Cheese", 100m, 5,
+                    new ShippableProduct("Cheese", 0.2),
+                    new PerishableProduct(DateTime.Today.AddDays(3)));
+
+                var tv = new Product("TV", 300m, 2,
+                    new ShippableProduct("TV", 5.0),
+                    new NonPerishableProduct());
+
+                var scratchCard = new Product("ScratchCard", 50m, 10,
+                    null,
+                    new NonPerishableProduct());
+
+                var biscuits = new Product("Biscuits", 150m, 3,
+                    null,
+                    new PerishableProduct(DateTime.Today.AddDays(2)));
 
                 cart.Add(cheese, 2);
                 cart.Add(tv, 1);
                 cart.Add(scratchCard, 1);
                 cart.Add(biscuits, 1);
 
-                var checkout = new CheckoutService();
-                checkout.Checkout(customer, cart);
+                new CheckoutService().Checkout(customer, cart);
             });
 
             RunTest("Creating product with expired date", () =>
             {
                 var customer = new Customer(1000m);
                 var cart = new Cart();
-                var expiredCheese = new PerishableShippableProduct("OldCheese", 80m, 3, 0.5, DateTime.Today.AddDays(-1));
+
+                var expiredCheese = new Product("OldCheese", 80m, 3,
+                    new ShippableProduct("OldCheese", 0.5),
+                    new PerishableProduct(DateTime.Today.AddDays(-1)));
+
                 cart.Add(expiredCheese, 1);
                 new CheckoutService().Checkout(customer, cart);
             });
+
             RunTest("Creating product with unrealistic expiring date", () =>
             {
-                var customer = new Customer(1000m);
-                var cart = new Cart();
-                var expiredCheese = new PerishableShippableProduct("UnrealisticCheese", 80m, 3, 0.5, DateTime.Today.AddYears(1000));
-                cart.Add(expiredCheese, 1);
-                new CheckoutService().Checkout(customer, cart);
+                var unrealistic = new Product("UnrealisticCheese", 80m, 3,
+                    new ShippableProduct("UnrealisticCheese", 0.5),
+                    new PerishableProduct(DateTime.Today.AddYears(1000)));
             });
 
             RunTest("Creating product with negative quantity", () =>
             {
-                var customer = new Customer(1000m);
-                var cart = new Cart();
-                var expiredCheese = new PerishableShippableProduct("Cheese", 80m, -5, 0.5, DateTime.Today.AddDays(3));
-                cart.Add(expiredCheese, 1);
-                new CheckoutService().Checkout(customer, cart);
+                var p = new Product("Cheese", 80m, -5,
+                    new ShippableProduct("Cheese", 0.5),
+                    new PerishableProduct(DateTime.Today.AddDays(3)));
             });
+
             RunTest("Creating product with negative price", () =>
             {
-                var product = new NonPerishableShippableProduct("Phone", -100m, 3, 1.0);
+                var product = new Product("Phone", -100m, 3,
+                    new ShippableProduct("Phone", 1.0),
+                    new NonPerishableProduct());
             });
+
             RunTest("Creating shippable product with zero weight", () =>
             {
-                var product = new NonPerishableShippableProduct("TV", 300m, 1, 0.0);
+                var product = new Product("TV", 300m, 1,
+                    new ShippableProduct("TV", 0.0),
+                    new NonPerishableProduct());
             });
+
             RunTest("Creating product with too high weight", () =>
             {
-                var product = new NonPerishableShippableProduct("MegaTV", 300m, 1, 1000000);
+                var product = new Product("MegaTV", 300m, 1,
+                    new ShippableProduct("MegaTV", 1000000),
+                    new NonPerishableProduct());
             });
 
             RunTest("Creating zero-quantity product", () =>
             {
-                var customer = new Customer(1000m);
-                var cart = new Cart();
-                var item = new NonPerishableShippableProduct("TV", 300m, 0, 5.0);
-                cart.Add(item, 1);
+                var item = new Product("TV", 300m, 0,
+                    new ShippableProduct("TV", 5.0),
+                    new NonPerishableProduct());
             });
 
             RunTest("Out of Stock Product", () =>
             {
                 var customer = new Customer(500m);
                 var cart = new Cart();
-                var tv = new NonPerishableShippableProduct("TV", 300m, 1, 5.0);
-                cart.Add(tv, 2); 
+
+                var tv = new Product("TV", 300m, 1,
+                    new ShippableProduct("TV", 5.0),
+                    new NonPerishableProduct());
+
+                cart.Add(tv, 2);
             });
+
             RunTest("Empty cart checkout", () =>
             {
                 var customer = new Customer(1000m);
@@ -90,22 +115,31 @@ namespace e_commerce_system
 
             RunTest("Insufficient Balance", () =>
             {
-                var customer = new Customer(100m); 
+                var customer = new Customer(100m);
                 var cart = new Cart();
-                var tv = new NonPerishableShippableProduct("TV", 300m, 1, 5.0);
+
+                var tv = new Product("TV", 300m, 1,
+                    new ShippableProduct("TV", 5.0),
+                    new NonPerishableProduct());
+
                 cart.Add(tv, 1);
                 new CheckoutService().Checkout(customer, cart);
             });
 
             RunTest("Invalid Product Name", () =>
             {
-                var p = new NonPerishableShippableProduct("", 100m, 2, 1.0); 
+                var p = new Product("", 100m, 2,
+                    new ShippableProduct("Invalid", 1.0),
+                    new NonPerishableProduct());
             });
 
             RunTest("Negative Quantity in Cart", () =>
             {
                 var cart = new Cart();
-                var item = new NonPerishableNonShippableProduct("Item", 50m, 10);
+                var item = new Product("Item", 50m, 10,
+                    null,
+                    new NonPerishableProduct());
+
                 cart.Add(item, -3);
             });
 

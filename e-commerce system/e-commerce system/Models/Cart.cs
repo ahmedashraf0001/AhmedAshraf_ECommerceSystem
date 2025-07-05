@@ -12,16 +12,10 @@ namespace e_commerce_system.Models
         private Dictionary<Product, int> items = new Dictionary<Product, int>();
         public void Add(Product prd, int amount)
         {
-            prd.CheckQTY(amount);
-
-            if (items.ContainsKey(prd)) 
-            {
-                items[prd] += amount;
-            }
-            else 
-            {
-                items[prd] = amount;
-            }
+            int current = items.GetValueOrDefault(prd, 0);
+            int total = current + amount;
+            prd.CheckQTY(total);
+            items[prd] = total;
         }
         public IReadOnlyDictionary<Product, int> Items => items;
         public bool IsEmpty() => items.Count == 0; 

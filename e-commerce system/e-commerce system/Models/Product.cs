@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 namespace e_commerce_system.Products
 {
 
-    public abstract class Product
+    public class Product
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 
-        public Product(string Name, decimal Price, int Quantity)
+        private readonly IPerishable _perishableBehavior;
+        private readonly IShippable? _shippingBehavior;
+        public Product(string Name, decimal Price, int Quantity, IShippable? shippable, IPerishable perishable)
         {
             if(string.IsNullOrEmpty(Name)) throw new ArgumentException(Constants.ProductNameRequired);         
             if(Price < 0) throw new ArgumentException(Constants.PriceNegative);
@@ -24,6 +26,8 @@ namespace e_commerce_system.Products
             this.Name = Name.ToLower().Trim();
             this.Price = Price;
             this.Quantity = Quantity;
+            this._shippingBehavior = shippable;
+            this._perishableBehavior = perishable;
         }
         public virtual int ReduceQTY(int amount)
         {
@@ -34,6 +38,11 @@ namespace e_commerce_system.Products
         }
         public virtual void CheckQTY(int amount)
         {
+            if (IsExpired())
+            {
+                throw new ArgumentException(Constants.ProductExpired);
+            }
+
             if (amount == 0) throw new ArgumentException(Constants.ProductQTYZero);
             if (amount < 0) throw new ArgumentException(Constants.InvalidReduceAmount);
             if (amount > Quantity) throw new ArgumentException(Constants.ReduceExceedsStock);
@@ -50,7 +59,19 @@ namespace e_commerce_system.Products
                 return false;
             }
         }
-        public abstract bool IsExpired();
-        public abstract bool NeedsShipping();
+        public bool IsExpired() => _perishableBehavior.IsExpired();
+        public bool NeedsShipping()=> _shippingBehavior != null ;
+        public double GetWeight() => _shippingBehavior?.GetWeight() ?? 0;
+        public IShippable? GetShippingInfo() => _shippingBehavior;
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Product other) return false;
+            return Name.Equals(other.Name, StringComparison.OrdinalIgnoreCase);
+        }
+        public override int GetHashCode()
+        {
+            return Name.ToLower().GetHashCode();
+        }
     }
 }
