@@ -1,73 +1,99 @@
 ﻿using e_commerce_system.Interfaces;
 using e_commerce_system.Models;
-
+using e_commerce_system.Products;
 
 namespace e_commerce_system.Services
 {
-    class CheckoutService: ICheckoutService
-    {   
-        public void Checkout(Customer customer, Cart cart) 
+    class CheckoutService : ICheckoutService
+    {
+        public void Checkout(Customer customer, Cart cart)
         {
-            if (cart.IsEmpty()) throw new ArgumentException(Constants.CartPassedEmptly);
+            if (cart.IsEmpty())
+                throw new ArgumentException(Constants.CartPassedEmptly);
 
-            decimal subtotal = 0;
-            decimal total = 0;
-            double shippingfees = 0;
-
-            List<IShippable> shippables = new();
-            var originalQty = cart.Items.ToDictionary(p => p.Key, p => p.Key.Quantity);
+            var originalQuantities = SaveOriginalstate(cart);
             var originalBalance = customer.Balance;
 
             try
             {
-                foreach (var item in cart.Items)
-                {
-                    item.Key.ReduceQTY(item.Value);
-
-                    decimal itemtotal = item.Value * item.Key.Price;
-                    subtotal += itemtotal;
-
-                    if (item.Key.NeedsShipping())
-                    {
-                        var shipInfo = item.Key.GetShippingInfo();
-                        for (int i = 0; i < item.Value; i++)
-                            shippables.Add(shipInfo!);
-                    }
-                }
-                shippingfees = shippables.Sum(e => e.GetWeight()) * Constants.FeesForKG;
-                total = (decimal)shippingfees + subtotal;
+                decimal subtotal = CalcSubtotal(cart);
+                List<IShippable> items = GetShippables(cart);
+                double shippingCost = CalcShipping(items);
+                decimal total = subtotal + (decimal)shippingCost;
 
                 customer.ReduceBalance(total);
+                ReduceProductQty(cart);
 
-                if (shippables.Any())
-                    ShippingService.Ship(shippables);
-            
-                Print(cart, subtotal, shippingfees, total ,customer.Balance, shippables);
+                if (items.Any())
+                    ShippingService.Ship(items);
+
+                Print(cart, subtotal, shippingCost, total, customer.Balance, items);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
-                foreach (var kv in originalQty)
-                {
-                    kv.Key.Quantity = kv.Value;
-                }
-                customer.Balance = originalBalance;
-
-                throw new ArgumentException($"{ex.Message}");
+                RestoreOriginalState(originalQuantities, customer, originalBalance);
+                throw new ArgumentException(ex.Message);
             }
         }
-        private void Print(Cart cart, decimal subtotal, double shippingfees, decimal total, decimal balance, List<IShippable> shippables)
+
+        private Dictionary<Product, int> SaveOriginalstate(Cart cart)
+        {
+            return cart.Items.ToDictionary(item => item.Key, item => item.Key.Quantity);
+        }
+
+        private decimal CalcSubtotal(Cart cart)
+        {
+            return cart.Items.Sum(item => item.Key.Price * item.Value);
+        }
+
+        private List<IShippable> GetShippables(Cart cart)
+        {
+            List<IShippable> Items = new();
+
+            foreach (var (product, quantity) in cart.Items)
+            {
+                if (product.NeedsShipping())
+                {
+                    var Info = product.GetShippingInfo();
+                    for (int i = 0; i < quantity; i++)
+                        Items.Add(Info!);
+                }
+            }
+
+            return Items;
+        }
+
+        private double CalcShipping(List<IShippable> items)
+        {
+            return items.Sum(item => item.GetWeight()) * Constants.FeesForKG;
+        }
+
+        private void ReduceProductQty(Cart cart)
+        {
+            foreach (var (product, quantity) in cart.Items)
+                product.ReduceQTY(quantity);
+        }
+
+        private void Print(Cart cart, decimal subtotal, double shipping, decimal total, decimal balance, List<IShippable> Items)
         {
             Console.WriteLine("** Checkout receipt **");
 
-            foreach (var entry in cart.Items)
-                Console.WriteLine($"{entry.Value}x {entry.Key.Name,-12} {entry.Key.Price * entry.Value} EGP");
+            foreach (var (product, quantity) in cart.Items)
+                Console.WriteLine($"{quantity}x {product.Name,-12} {product.Price * quantity} EGP");
 
             Console.WriteLine("---------------------------");
             Console.WriteLine($"Subtotal         {subtotal} EGP");
-            Console.WriteLine($"Shipping         {shippingfees} EGP  -> ({shippables.Sum(e => e.GetWeight()):0.0} kg × {Constants.FeesForKG} EGP/kg)");
+            Console.WriteLine($"Shipping         {shipping} EGP  -> ({Items.Sum(i => i.GetWeight()):0.0} kg × {Constants.FeesForKG} EGP/kg)");
             Console.WriteLine($"Amount           {total} EGP");
             Console.WriteLine($"Balance Left     {balance} EGP\n");
         }
 
+        private void RestoreOriginalState(Dictionary<Product, int> qtys, Customer customer, decimal originalBalance)
+        {
+            foreach (var (product, quantity) in qtys)
+                product.Quantity = quantity;
+
+            customer.Balance = originalBalance;
+        }
     }
 }

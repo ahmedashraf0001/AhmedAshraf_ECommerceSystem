@@ -12,3 +12,18 @@ G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj
 G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.pdb
 G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.genruntimeconfig.cache
 G:\work\Coding\backend\,net api\Projects\e-commerce system\e-commerce system\obj\Debug\net8.0\ref\e-commerce system.dll
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.exe
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.deps.json
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.runtimeconfig.json
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.dll
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\bin\Debug\net8.0\e-commerce system.pdb
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.AssemblyInfoInputs.cache
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.AssemblyInfo.cs
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.csproj.CoreCompileInputs.cache
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.sourcelink.json
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.dll
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\refint\e-commerce system.dll
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.pdb
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\e-commerce system.genruntimeconfig.cache
+C:\Users\lyr1c\Desktop\New folder (2)\AhmedAshraf_ECommerceSystem\e-commerce system\e-commerce system\obj\Debug\net8.0\ref\e-commerce system.dll
