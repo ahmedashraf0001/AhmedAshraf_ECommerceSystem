@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace e_commerce_system.Models
 {
-    class NonPerishableProduct : IPerishable
+    class NonPerishable : IPerishable
     {
         public bool IsExpired() => false;
     }

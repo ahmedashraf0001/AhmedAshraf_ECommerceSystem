@@ -1,99 +1,102 @@
 ﻿using e_commerce_system.Interfaces;
 using e_commerce_system.Models;
 using e_commerce_system.Products;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace e_commerce_system.Services
 {
     class CheckoutService : ICheckoutService
     {
-        public void Checkout(Customer customer, Cart cart)
+        public void Checkout(Customer user, Cart cart)
         {
-            if (cart.IsEmpty())
-                throw new ArgumentException(Constants.CartPassedEmptly);
+            if (cart.isEmpty())
+                throw new ArgumentException(consts.err_cart_empty);
 
-            var originalQuantities = SaveOriginalstate(cart);
-            var originalBalance = customer.Balance;
+            var original = backup(cart);
+            var oldBalance = user.balance;
 
             try
             {
-                decimal subtotal = CalcSubtotal(cart);
-                List<IShippable> items = GetShippables(cart);
-                double shippingCost = CalcShipping(items);
-                decimal total = subtotal + (decimal)shippingCost;
+                var subtotal = calcSubtotal(cart);
+                var shippables = getShippingItems(cart);
+                var shippingCost = calcShipping(shippables);
+                var total = subtotal + (decimal)shippingCost;
 
-                customer.ReduceBalance(total);
-                ReduceProductQty(cart);
+                user.takeFromBalance(total);
+                applyQtyReduction(cart);
 
-                if (items.Any())
-                    ShippingService.Ship(items);
+                if (shippables.Any())
+                    ShippingService.Ship(shippables);
 
-                Print(cart, subtotal, shippingCost, total, customer.Balance, items);
+                print(cart, subtotal, shippingCost, total, user.balance, shippables);
             }
             catch (Exception ex)
             {
-                RestoreOriginalState(originalQuantities, customer, originalBalance);
+                restore(original, user, oldBalance);
                 throw new ArgumentException(ex.Message);
             }
         }
 
-        private Dictionary<Product, int> SaveOriginalstate(Cart cart)
+        private Dictionary<Product, int> backup(Cart cart)
         {
-            return cart.Items.ToDictionary(item => item.Key, item => item.Key.Quantity);
+            return cart.Items.ToDictionary(x => x.Key, x => x.Key.qty);
         }
 
-        private decimal CalcSubtotal(Cart cart)
+        private decimal calcSubtotal(Cart cart)
         {
-            return cart.Items.Sum(item => item.Key.Price * item.Value);
+            return cart.Items.Sum(x => x.Key.price * x.Value);
         }
 
-        private List<IShippable> GetShippables(Cart cart)
+        private List<IShippable> getShippingItems(Cart cart)
         {
-            List<IShippable> Items = new();
+            var list = new List<IShippable>();
 
-            foreach (var (product, quantity) in cart.Items)
+            foreach (var (p, qty) in cart.Items)
             {
-                if (product.NeedsShipping())
+                if (p.needsShipping())
                 {
-                    var Info = product.GetShippingInfo();
-                    for (int i = 0; i < quantity; i++)
-                        Items.Add(Info!);
+                    var info = p.getShippingDetails();
+                    for (int i = 0; i < qty; i++)
+                        list.Add(info!);
                 }
             }
 
-            return Items;
+            return list;
         }
 
-        private double CalcShipping(List<IShippable> items)
+        private double calcShipping(List<IShippable> list)
         {
-            return items.Sum(item => item.GetWeight()) * Constants.FeesForKG;
+            return list.Sum(i => i.GetWeight()) * consts.fee_per_kg;
         }
 
-        private void ReduceProductQty(Cart cart)
+        private void applyQtyReduction(Cart cart)
         {
-            foreach (var (product, quantity) in cart.Items)
-                product.ReduceQTY(quantity);
+            foreach (var (p, qty) in cart.Items)
+                p.take(qty);
         }
 
-        private void Print(Cart cart, decimal subtotal, double shipping, decimal total, decimal balance, List<IShippable> Items)
+        private void print(Cart cart, decimal subtotal, double shipping, decimal total, decimal balance, List<IShippable> items)
         {
-            Console.WriteLine("** Checkout receipt **");
+            Console.WriteLine(":: receipt ::");
 
-            foreach (var (product, quantity) in cart.Items)
-                Console.WriteLine($"{quantity}x {product.Name,-12} {product.Price * quantity} EGP");
+            foreach (var (p, qty) in cart.Items)
+                Console.WriteLine($"{qty}x {p.name,-12} {p.price * qty} EGP");
 
-            Console.WriteLine("---------------------------");
-            Console.WriteLine($"Subtotal         {subtotal} EGP");
-            Console.WriteLine($"Shipping         {shipping} EGP  -> ({Items.Sum(i => i.GetWeight()):0.0} kg × {Constants.FeesForKG} EGP/kg)");
-            Console.WriteLine($"Amount           {total} EGP");
-            Console.WriteLine($"Balance Left     {balance} EGP\n");
+            Console.WriteLine("--------------------");
+            Console.WriteLine($"subtotal:   {subtotal} EGP");
+            Console.WriteLine($"shipping:   {shipping:0.00} EGP (at {consts.fee_per_kg} EGP/kg)");
+            Console.WriteLine($"total:      {total} EGP");
+            Console.WriteLine($"balance:    {balance} EGP\n");
         }
 
-        private void RestoreOriginalState(Dictionary<Product, int> qtys, Customer customer, decimal originalBalance)
+        private void restore(Dictionary<Product, int> originalQtys, Customer user, decimal oldBalance)
         {
-            foreach (var (product, quantity) in qtys)
-                product.Quantity = quantity;
+            foreach (var (p, qty) in originalQtys)
+                p.qty = qty;
 
-            customer.Balance = originalBalance;
+            user.balance = oldBalance;
         }
     }
 }

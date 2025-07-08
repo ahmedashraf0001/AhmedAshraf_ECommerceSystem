@@ -13,7 +13,7 @@ namespace e_commerce_system.Services
         {
             Console.WriteLine("** Shipment notice **");
 
-            if (items.Count == 0) throw new ArgumentException(Constants.NoShippingItems);
+            if (items.Count == 0) throw new ArgumentException(consts.err_no_ship_items);
 
             double totalweight = 0;
             var model = items.GroupBy(e => e.GetName()).ToDictionary(e => e.Key, g => g.ToList());

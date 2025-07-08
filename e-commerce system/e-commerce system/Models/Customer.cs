@@ -2,18 +2,26 @@
 {
     public class Customer
     {
-        public decimal Balance { get; set; }
-        public Customer(decimal Balance)
+        public decimal balance { get; set; }
+
+        public Customer(decimal balance)
         {
-            if (Balance < 0) throw new ArgumentException(Constants.BalanceNegative);
-            this.Balance = Balance;
+            if (balance < 0)
+                throw new ArgumentException(consts.err_neg_bal);
+
+            this.balance = balance;
         }
-        public decimal ReduceBalance(decimal amount)
+
+        public decimal takeFromBalance(decimal amount)
         {
-            if (amount < 0) throw new ArgumentException(Constants.BalanceNegative);
-            if (Balance < amount) throw new ArgumentException(Constants.ReduceExceedsBalance);
-            Balance -= amount;
-            return Balance;
+            if (amount < 0)
+                throw new ArgumentException(consts.err_neg_bal);
+
+            if (balance < amount)
+                throw new ArgumentException(consts.err_over_bal);
+
+            balance -= amount;
+            return balance;
         }
     }
 }

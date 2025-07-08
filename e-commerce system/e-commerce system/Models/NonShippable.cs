@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace e_commerce_system.Models
 {
-    class NonShippableProduct : IShippable
+    class NonShippable : IShippable
     {
         public string GetName() => "";
 
