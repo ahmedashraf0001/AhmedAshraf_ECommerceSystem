@@ -56,6 +56,8 @@ The system includes comprehensive test cases covering various scenarios:
 
 ## Error Handling
 
+![Test Results](./error-handling.png)
+
 The system validates:
 - Expired products
 - Insufficient stock
